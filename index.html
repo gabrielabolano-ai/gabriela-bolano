@@ -211,11 +211,11 @@
     }
 
     .hero-title {
-      font-size: 2.35rem;
+      font-size: 2.25rem;
       font-weight: 850;
       line-height: 1.2;
       color: var(--color-text-main);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.35rem;
       letter-spacing: -0.02em;
     }
 
@@ -264,6 +264,38 @@
 
     .target-card.no .target-card-header {
       color: var(--color-danger-text);
+    }
+
+    .target-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .target-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.98rem;
+      line-height: 1.45;
+      color: var(--color-text-main);
+    }
+
+    .target-icon {
+      font-weight: 700;
+      flex-shrink: 0;
+      font-size: 1rem;
+      margin-top: 0.1rem;
+    }
+
+    .target-card.yes .target-icon {
+      color: var(--color-primary);
+    }
+
+    .target-card.no .target-icon {
+      color: #ef4444;
     }
 
     /* --- Sección 3: Demo (Antes y Después + Caja Vacía) --- */
@@ -670,19 +702,20 @@
   <main id="inicio">
 
     <!-- =================================================================
-         SECCIÓN 1: QUIÉN SOY Y QUÉ OFREZCO
+         SECCIÓN 1: QUIÉN SOY Y QUÉ OFREZCO (HERO)
          ================================================================= -->
     <section class="hero-section">
       <div class="container">
-        <span class="section-tag">Presentación</span>
-        <h1 class="hero-title">Tu WhatsApp atendiendo las 24 horas sin que vivas pegado al teléfono.</h1>
+        <span class="section-tag">Automatización con IA</span>
+        <!-- Frase de oferta directa y concreta en español rioplatense -->
+        <h1 class="hero-title">Un asistente inteligente en tu WhatsApp que responde al instante las 24 horas y te pasa solo a los clientes listos para comprar.</h1>
         
         <p class="lead-text">
-          Soy Gabriela y le instalo a tu negocio un asistente inteligente que responde consultas al segundo y te pasa solo a los clientes listos para comprar.
+          Soy Gabriela. Me especializo en automatización y chatbots con inteligencia artificial para que los dueños de negocios atiendan más rápido, vendan más y dejen de ser esclavos de los mensajes a deshoras.
         </p>
 
         <p class="secondary-text">
-          Dejás de perder ventas por tardar en contestar y recuperás tus noches y fines de semana libres.
+          Te saco de encima la pérdida de ventas por tardar en responder, el desgaste de escribir 40 veces al día lo mismo (precios, horarios, medios de pago, ubicación) y la culpa de no contestar de noche o durante el fin de semana cuando entra un cliente con ganas de comprar.
         </p>
 
         <!-- Objeción que derriba -->
@@ -691,14 +724,14 @@
           <div class="objection-text">
             <span class="objection-label">Duda frecuente</span>
             <strong>“La inteligencia artificial es una moda para empresas de afuera que a mí no me sirve para nada.”</strong>
-            <p>Al contrario: está pensada exactamente para resolver la pérdida de ventas diaria y el agotamiento de responder siempre lo mismo en tu negocio de todos los días.</p>
+            <p>Al contrario: está pensada para resolver la pérdida de ventas diaria y el agotamiento de responder siempre lo mismo en tu negocio de todos los días.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- =================================================================
-         SECCIÓN 2: PARA QUIÉN SÍ / PARA QUIÉN NO
+         SECCIÓN 2: PARA QUIÉN SÍ / PARA QUIÉN NO (3 VIÑETAS CADA UNO)
          ================================================================= -->
     <section id="para-quien">
       <div class="container">
@@ -706,26 +739,48 @@
         <h2 class="section-title">¿Esto sirve para tu negocio?</h2>
         
         <div class="target-grid">
-          <!-- Para quién SÍ -->
+          <!-- Para quién SÍ (3 viñetas cortas, rioplatense) -->
           <article class="target-card yes">
             <div class="target-card-header">
               <span aria-hidden="true">✅</span>
               <h3>Es para vos si...</h3>
             </div>
-            <p>
-              Tenés un comercio, taller o consultorio donde te explota el WhatsApp con preguntas repetidas y sentís que el teléfono no te deja laburar.
-            </p>
+            <ul class="target-list">
+              <li>
+                <span class="target-icon" aria-hidden="true">✓</span>
+                <span>Sos dueño de una pyme, comercio o profesional independiente (locales a la calle, distribuidores, centros de estética, talleres o consultorios).</span>
+              </li>
+              <li>
+                <span class="target-icon" aria-hidden="true">✓</span>
+                <span>Te explotan las consultas por WhatsApp todo el día con preguntas repetidas y sentís que el teléfono no te deja trabajar tranquilo.</span>
+              </li>
+              <li>
+                <span class="target-icon" aria-hidden="true">✓</span>
+                <span>Querés vender más y recuperar tus noches y fines de semana libres, sin perder clientes que se van a la competencia por tardar en contestar.</span>
+              </li>
+            </ul>
           </article>
 
-          <!-- Para quién NO -->
+          <!-- Para quién NO (3 viñetas cortas, rioplatense) -->
           <article class="target-card no">
             <div class="target-card-header">
               <span aria-hidden="true">❌</span>
               <h3>No es para vos si...</h3>
             </div>
-            <p>
-              Casi no recibís consultas, buscás que una máquina cierre ventas complejas sin humanos o no podés dedicar 45 minutos a contarme cómo vendés.
-            </p>
+            <ul class="target-list">
+              <li>
+                <span class="target-icon" aria-hidden="true">✕</span>
+                <span>Casi no recibís consultas por WhatsApp o la actividad de tu negocio no depende de los mensajes.</span>
+              </li>
+              <li>
+                <span class="target-icon" aria-hidden="true">✕</span>
+                <span>Buscás que una máquina cierre sola ventas complejas sin ninguna clase de intervención humana.</span>
+              </li>
+              <li>
+                <span class="target-icon" aria-hidden="true">✕</span>
+                <span>No podés dedicar 45 minutos a contarme cómo vendés ni pasarme tus preguntas frecuentes.</span>
+              </li>
+            </ul>
           </article>
         </div>
 
@@ -735,7 +790,7 @@
           <div class="objection-text">
             <span class="objection-label">Duda frecuente</span>
             <strong>“Seguro esto es para empresas gigantes con miles de empleados, no para mi negocio de barrio.”</strong>
-            <p>Está diseñado puntualmente para comercios locales, profesionales independientes y talleres donde el dueño o pocos empleados atienden todo.</p>
+            <p>Está diseñado puntualmente para comercios locales, pymes y talleres donde el dueño o pocos empleados atienden todo y necesitan ganar tiempo.</p>
           </div>
         </div>
       </div>
@@ -800,10 +855,10 @@
     <section id="como-trabajo">
       <div class="container">
         <span class="section-tag">Metodología</span>
-        <h2 class="section-title">Funcionando en tu negocio en 3 pasos y 7 días</h2>
+        <h2 class="section-title">Funcionando en tu negocio en 3 pasos y 7 a 10 días hábiles</h2>
         
         <p class="secondary-text">
-          Sin procesos engorrosos ni pérdidas de tiempo. Nos enfocamos en resolver tu atención rápido.
+          Sin frenar ni un solo día la actividad de tu negocio. De la configuración técnica me encargo yo al 100%.
         </p>
 
         <div class="steps-container">
@@ -812,7 +867,7 @@
             <div class="step-number">1</div>
             <div class="step-content">
               <h3>Charla inicial de 45 minutos</h3>
-              <p>Tenemos una charla para entender cómo hablás con tus clientes, me pasás tus dudas frecuentes y yo me encargo de todo el armado técnico.</p>
+              <p>Me contás cómo vendés, me pasás una lista simple con las preguntas que más te hacen tus clientes y el acceso a tu WhatsApp Business.</p>
             </div>
           </div>
 
@@ -820,8 +875,8 @@
           <div class="step-item">
             <div class="step-number">2</div>
             <div class="step-content">
-              <h3>Prueba en tu mismo número</h3>
-              <p>Lo probamos juntos en tu mismo número para ajustar detalles, verificar las respuestas y asegurarnos de que hable tal como querés.</p>
+              <h3>Pruebas y ajustes juntos</h3>
+              <p>Hacemos las pruebas juntos sobre tu misma línea para ajustar detalles y asegurarnos de que responda exactamente con el tono de tu negocio.</p>
             </div>
           </div>
 
@@ -829,8 +884,8 @@
           <div class="step-item">
             <div class="step-number">3</div>
             <div class="step-content">
-              <h3>Andando solo y sin complicaciones</h3>
-              <p>Te lo dejo funcionando de forma autónoma. No tenés que tocar nada raro ni instalar programas extraños en tu computadora.</p>
+              <h3>Listo y funcionando solo</h3>
+              <p>En 7 a 10 días hábiles queda operando las 24 horas. Vos solo te dedicás a atender a los clientes que ya están listos para comprar.</p>
             </div>
           </div>
         </div>
@@ -841,7 +896,7 @@
           <div class="objection-text">
             <span class="objection-label">Duda frecuente</span>
             <strong>“No tengo tiempo para ponerme a renegar con un sistema nuevo ni sé de tecnología.”</strong>
-            <p>Vos solo me dedicás 45 minutos para explicarme cómo vendés; del resto del armado y la configuración técnica me encargo yo al 100%.</p>
+            <p>Vos solo me dedicás 45 minutos para explicarme cómo vendés; del armado, la programación y las pruebas me encargo yo al 100%.</p>
           </div>
         </div>
       </div>
@@ -893,7 +948,7 @@
     </section>
 
     <!-- =================================================================
-         SECCIÓN 6: PREGUNTAS FRECUENTES (CIERRA LAS 6 OBJECIONES)
+         SECCIÓN 6: PREGUNTAS FRECUENTES (LAS 6 PREGUNTAS EXACTAS)
          ================================================================= -->
     <section id="faq">
       <div class="container">
@@ -911,51 +966,51 @@
         <!-- Acordeón interactivo accesible con <details> nativo -->
         <div class="faq-list">
 
-          <!-- FAQ 1: Sobre el control de la línea -->
+          <!-- FAQ 1: Robot frío -->
           <details class="faq-item">
-            <summary class="faq-question">¿Tengo riesgo de perder el control de mi línea o hacer un desastre técnico?</summary>
+            <summary class="faq-question">¿Va a sonar como un robot frío que espanta clientes?</summary>
             <div class="faq-answer">
-              Para nada. Tu número de WhatsApp sigue siendo tuyo y funciona exactamente igual en tu celular. Podés leer todas las conversaciones en tiempo real e intervenir en el momento en que vos quieras con solo escribir. Si el asistente no sabe algo puntual, jamás inventa: te lo deriva de inmediato.
+              No. Lo configuro para que hable con el tono de tu negocio: cálido, educado y con respuestas claras, sin frases armadas ni lenguaje técnico.
             </div>
           </details>
 
-          <!-- FAQ 2: Negocios chicos vs empresas gigantes -->
+          <!-- FAQ 2: Control de WhatsApp -->
           <details class="faq-item">
-            <summary class="faq-question">¿Esto sirve para un negocio chico o de barrio, o es solo para multinacionales?</summary>
+            <summary class="faq-question">¿Pierdo el control de mi WhatsApp?</summary>
             <div class="faq-answer">
-              Está hecho a medida de comercios de barrio, talleres, estudios y consultorios. Quienes más lo aprovechan son precisamente los negocios donde una o dos personas hacen todo y no dan abasto para contestar WhatsApp mientras trabajan.
+              Para nada. El número sigue siendo tuyo y podés leer todo lo que pasa. Si vos querés entrar y responderle a alguien en persona, el bot se corre y te deja hablar a vos.
             </div>
           </details>
 
-          <!-- FAQ 3: ¿Suena frío o robótico? -->
+          <!-- FAQ 3: Preguntas raras o desconocidas -->
           <details class="faq-item">
-            <summary class="faq-question">¿No va a sonar como un contestador automático que espante a mis clientes?</summary>
+            <summary class="faq-question">¿Qué pasa si le preguntan algo raro o que no sabe?</summary>
             <div class="faq-answer">
-              No es un menú con botones rígidos de "marque 1 para precios". Es un modelo de lenguaje que comprende texto informal, audios y modismos habituales, redactando respuestas amables, educadas y con el tono exacto que vos usás en tu negocio.
+              El asistente no inventa información. Cuando no sabe algo o detecta un caso especial, le avisa al cliente con cortesía que te va a pasar la consulta y te notifica para que intervengas.
             </div>
           </details>
 
-          <!-- FAQ 4: Tiempo y conocimientos técnicos -->
+          <!-- FAQ 4: Cambio de número -->
           <details class="faq-item">
-            <summary class="faq-question">¿Cuánto tiempo me lleva a mí y qué pasa si no sé nada de tecnología?</summary>
+            <summary class="faq-question">¿Tengo que cambiar mi número de teléfono actual?</summary>
             <div class="faq-answer">
-              Solo dedicás 45 minutos en la videollamada inicial. Del diseño del flujo, configuración, pruebas y puesta en marcha me ocupo yo. Para usarlo en el día a día no tenés que aprender ningún programa nuevo; seguís usando tu WhatsApp de siempre.
+              No, trabajamos sobre tu misma línea comercial para que no pierdas ningún contacto ni historial.
             </div>
           </details>
 
-          <!-- FAQ 5: Precios y paquetes enlatados -->
+          <!-- FAQ 5: Conocimientos técnicos o programas raros -->
           <details class="faq-item">
-            <summary class="faq-question">¿Cómo sé si la inversión tiene sentido para mi caso antes de contratar?</summary>
+            <summary class="faq-question">¿Tengo que saber de tecnología o instalar programas raros?</summary>
             <div class="faq-answer">
-              En la reunión de 20 minutos te muestro un prototipo funcionando en vivo con casos de tu negocio. Si no ves con tus propios ojos que te ahorra horas de trabajo y te salva ventas que hoy perdés, no avanzamos. Sin presiones.
+              Cero. Una vez conectado, trabaja solo. Tu única tarea sigue siendo la de siempre: atender a los clientes que ya están listos para comprar.
             </div>
           </details>
 
-          <!-- FAQ 6: Actualización de precios y cambios futuros -->
+          <!-- FAQ 6: Cambio de precios u horarios -->
           <details class="faq-item">
-            <summary class="faq-question">¿Qué pasa cuando cambio mis precios, servicios u horarios?</summary>
+            <summary class="faq-question">¿Y si el mes que viene cambio los precios o los horarios?</summary>
             <div class="faq-answer">
-              Me mandás un mensaje con la lista nueva o el horario actualizado y queda ajustado en el día. No tenés que preocuparte por tocar configuraciones técnicas complicadas.
+              Me avisás con un mensaje y actualizamos la información en el acto, sin complicaciones.
             </div>
           </details>
 
@@ -967,7 +1022,7 @@
           <div class="objection-text">
             <span class="objection-label">Duda frecuente</span>
             <strong>“Tengo miedo de perder el control de mi línea de WhatsApp o hacer un desastre técnico.”</strong>
-            <p>Tenés control total: el teléfono sigue en tu mano, podés pausar el asistente cuando quieras y entrar a la conversación con un solo toque.</p>
+            <p>Tenés control total: el teléfono sigue en tu mano, podés intervenir cuando quieras y el bot jamás inventa datos.</p>
           </div>
         </div>
       </div>
@@ -1041,7 +1096,7 @@
         });
       }
 
-      // 2. Acordeón inteligente para FAQ: cierra otras respuestas si se abre una nueva (opcional y accesible)
+      // 2. Acordeón inteligente para FAQ: cierra otras respuestas si se abre una nueva (accesible y liviano)
       const allFaqs = document.querySelectorAll('details.faq-item');
       allFaqs.forEach((faq) => {
         faq.addEventListener('toggle', () => {
