@@ -298,20 +298,7 @@
       color: #ef4444;
     }
 
-    /* --- Sección 3: Demo (Antes y Después + Caja Vacía) --- */
-    .before-after-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.25rem;
-      margin-bottom: 1.75rem;
-    }
-
-    @media (min-width: 640px) {
-      .before-after-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
+    /* --- Sección 3: Demo (Antes, Interfaz Consultorio y Después) --- */
     .state-card {
       padding: 1.35rem;
       border-radius: var(--radius-md);
@@ -331,7 +318,7 @@
 
     .state-card h3 {
       font-size: 1.1rem;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
       display: flex;
       align-items: center;
       gap: 0.4rem;
@@ -345,79 +332,304 @@
       color: var(--color-success-text);
     }
 
-    /* Placeholder visual para la demo (Caja Vacía lista para incrustar después) */
-    .demo-placeholder-box {
-      border: 2px dashed #cbd5e1;
-      background-color: #ffffff;
+    /* Contenedor principal de la demo interactiva */
+    .demo-interactive-wrapper {
+      background-color: var(--color-bg-card);
+      border: 1px solid var(--color-border);
       border-radius: var(--radius-lg);
-      padding: 2.5rem 1.5rem;
-      text-align: center;
-      margin-top: 1.5rem;
-      position: relative;
-      box-shadow: var(--shadow-sm);
+      padding: 1.5rem 1rem;
+      box-shadow: var(--shadow-md);
+      margin: 1.5rem auto;
+      max-width: 520px;
     }
 
-    .demo-placeholder-badge {
+    .demo-card-intro {
+      text-align: center;
+      margin-bottom: 1.15rem;
+    }
+
+    .demo-live-badge {
       display: inline-block;
       font-size: 0.8rem;
       font-weight: 700;
-      color: var(--color-text-muted);
-      background-color: #f1f5f9;
-      border: 1px solid #e2e8f0;
+      color: #065f46;
+      background-color: #d1fae5;
       padding: 0.35rem 0.85rem;
       border-radius: var(--radius-full);
-      margin-bottom: 1rem;
-    }
-
-    .demo-placeholder-box h4 {
-      font-size: 1.25rem;
-      color: var(--color-text-main);
       margin-bottom: 0.5rem;
     }
 
-    .demo-placeholder-box p {
+    .demo-live-instruction {
       font-size: 0.95rem;
       color: var(--color-text-muted);
-      max-width: 500px;
-      margin: 0 auto;
+      line-height: 1.4;
     }
 
-    /* Simulación visual miniatura tipo chat dentro del placeholder */
-    .chat-preview-mockup {
-      max-width: 380px;
-      margin: 1.5rem auto 0;
-      background-color: #f0f2f5;
-      border-radius: var(--radius-md);
+    /* Marco del Celular / WhatsApp */
+    .whatsapp-mockup {
+      background-color: #efeae2;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid #cbd5e1;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wa-header {
+      background-color: #075e54;
+      color: #ffffff;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .wa-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      color: #075e54;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .wa-header-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .wa-contact-name {
+      display: block;
+      font-weight: 700;
+      font-size: 0.98rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .wa-contact-status {
+      display: block;
+      font-size: 0.75rem;
+      color: #a7f3d0;
+      line-height: 1.2;
+    }
+
+    .wa-reset-btn {
+      background: rgba(255, 255, 255, 0.18);
+      border: none;
+      color: #ffffff;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: background 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .wa-reset-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .wa-messages {
       padding: 1rem;
-      border: 1px solid #e2e8f0;
+      height: 330px;
+      overflow-y: auto;
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
-      text-align: left;
+      scroll-behavior: smooth;
     }
 
-    .mock-bubble {
-      padding: 0.65rem 0.9rem;
+    .wa-bubble {
+      max-width: 84%;
+      padding: 0.65rem 0.85rem;
       border-radius: 12px;
-      font-size: 0.85rem;
-      line-height: 1.4;
-      max-width: 82%;
+      position: relative;
+      font-size: 0.92rem;
+      line-height: 1.45;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+      word-wrap: break-word;
     }
 
-    .mock-bubble.client {
+    .wa-bubble.bot {
       background-color: #ffffff;
       align-self: flex-start;
-      border-bottom-left-radius: 3px;
-      color: #1e293b;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      border-top-left-radius: 2px;
+      color: #111827;
     }
 
-    .mock-bubble.bot {
+    .wa-bubble.user {
       background-color: #d9fdd3;
       align-self: flex-end;
-      border-bottom-right-radius: 3px;
-      color: #0f172a;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      border-top-right-radius: 2px;
+      color: #111827;
+    }
+
+    .wa-bubble-text {
+      margin-bottom: 0.2rem;
+    }
+
+    .wa-time {
+      display: block;
+      text-align: right;
+      font-size: 0.7rem;
+      color: #8696a0;
+      line-height: 1;
+    }
+
+    .wa-bubble.user .wa-time::after {
+      content: " ✓✓";
+      color: #53bdeb;
+      font-weight: bold;
+    }
+
+    /* Indicador escribiendo */
+    .wa-typing-indicator {
+      padding: 0.4rem 1rem;
+      font-size: 0.8rem;
+      color: #52525b;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: rgba(239, 234, 226, 0.85);
+    }
+
+    .typing-dots {
+      display: inline-flex;
+      gap: 3px;
+    }
+
+    .typing-dots span {
+      width: 5px;
+      height: 5px;
+      background-color: #075e54;
+      border-radius: 50%;
+      animation: pulseDot 1s infinite ease-in-out;
+    }
+
+    .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 0.3; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+
+    /* Chips rápidos */
+    .wa-quick-chips {
+      background-color: #f0f2f5;
+      padding: 0.65rem 0.75rem;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: thin;
+    }
+
+    .wa-quick-chips::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .wa-quick-chips::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+
+    .wa-chip {
+      background-color: #ffffff;
+      border: 1px solid #059669;
+      color: #059669;
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--radius-full);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background-color 0.15s ease, color 0.15s ease;
+      font-family: inherit;
+    }
+
+    .wa-chip:hover {
+      background-color: #ecfdf5;
+    }
+
+    /* Barra de entrada de texto */
+    .wa-input-bar {
+      background-color: #f0f2f5;
+      padding: 0.65rem 0.75rem;
+      border-top: 1px solid #e4e4e7;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .wa-input-field {
+      flex: 1;
+      background-color: #ffffff;
+      border: 1px solid #d4d4d8;
+      border-radius: var(--radius-full);
+      padding: 0.6rem 1rem;
+      font-size: 0.92rem;
+      font-family: inherit;
+      color: var(--color-text-main);
+      outline: none;
+    }
+
+    .wa-input-field:focus {
+      border-color: #059669;
+    }
+
+    .wa-send-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background-color: #059669;
+      color: #ffffff;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background-color 0.15s ease;
+    }
+
+    .wa-send-btn:hover {
+      background-color: #047857;
+    }
+
+    /* Botón al final de la demo */
+    .demo-cta-box {
+      text-align: center;
+      margin: 2rem 0 1.25rem;
+    }
+
+    .demo-action-button {
+      display: inline-block;
+      background-color: var(--color-primary);
+      color: #ffffff;
+      font-size: 1.08rem;
+      font-weight: 800;
+      text-decoration: none;
+      padding: 1.1rem 1.85rem;
+      border-radius: var(--radius-full);
+      box-shadow: 0 4px 14px rgba(5, 150, 105, 0.35);
+      transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    .demo-action-button:hover, .demo-action-button:focus-visible {
+      background-color: var(--color-primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(5, 150, 105, 0.45);
     }
 
     /* --- Sección 4: Cómo trabajo (Pasos) --- */
@@ -671,12 +883,20 @@
         padding: 1rem 1.25rem;
         font-size: 1.05rem;
       }
+      .demo-action-button {
+        width: 100%;
+        padding: 1rem 1.25rem;
+        font-size: 1rem;
+      }
       .step-item {
         flex-direction: column;
         gap: 0.75rem;
       }
       .header-status {
-        display: none; /* Simplifica la barra en pantallas muy estrechas */
+        display: none;
+      }
+      .demo-interactive-wrapper {
+        padding: 1rem 0.5rem;
       }
     }
   </style>
@@ -797,44 +1017,107 @@
     </section>
 
     <!-- =================================================================
-         SECCIÓN 3: DEMO (ANTES Y DESPUÉS)
+         SECCIÓN 3: DEMO INTERACTIVA (CONSULTORIO: ANTES, DEMO Y DESPUÉS)
          ================================================================= -->
     <section id="demo">
       <div class="container">
-        <span class="section-tag">Demostración</span>
+        <span class="section-tag">Demostración en vivo</span>
         <h2 class="section-title">El antes y el después en tu día a día</h2>
 
-        <div class="before-after-grid">
-          <div class="state-card before">
-            <h3><span>⚠️</span> El Antes</h3>
-            <p>
-              Escribir 40 veces al día los mismos precios, perder clientes que se van a la competencia por no contestar rápido y sufrir con el teléfono en la cena familiar.
+        <!-- 1) El antes en una frase -->
+        <div class="state-card before" style="margin-bottom: 1.5rem;">
+          <h3><span>⚠️</span> El Antes</h3>
+          <p>
+            <strong>Antes:</strong> Un paciente escribe a las 21:30 hs con dolor o preguntando si atienden por su obra social; nadie responde hasta el día siguiente a media mañana y el paciente ya agendó su turno en otro consultorio.
+          </p>
+        </div>
+
+        <!-- 2) La Demo Interactiva (Rubro Consultorio) -->
+        <div class="demo-interactive-wrapper">
+          <div class="demo-card-intro">
+            <span class="demo-live-badge">🟢 Demo Interactiva • Rubro Consultorio</span>
+            <p class="demo-live-instruction">
+              <strong>Probá el asistente vos mismo:</strong> tocá una opción rápida o escribí en el chat como si fueras un paciente.
             </p>
           </div>
 
-          <div class="state-card after">
-            <h3><span>✨</span> El Después</h3>
-            <p>
-              Respuestas amables e instantáneas a cualquier hora, clientes filtrados y vos atendiendo únicamente cuando hay plata sobre la mesa.
-            </p>
+          <!-- Marco visual de WhatsApp -->
+          <div class="whatsapp-mockup">
+            <!-- Encabezado de la conversación -->
+            <div class="wa-header">
+              <div class="wa-avatar" aria-hidden="true">🦷</div>
+              <div class="wa-header-info">
+                <span class="wa-contact-name">Consultorio Dra. Martínez</span>
+                <span class="wa-contact-status">En línea las 24 hs • Asistente IA</span>
+              </div>
+              <button type="button" class="wa-reset-btn" id="demo-reset-btn" title="Reiniciar chat">
+                ↺ Reiniciar
+              </button>
+            </div>
+
+            <!-- Cuerpo de mensajes del chat -->
+            <div class="wa-messages" id="demo-messages-container" aria-live="polite">
+              <div class="wa-bubble bot">
+                <div class="wa-bubble-text">
+                  ¡Hola! 👋 Te comunicás con el Consultorio Odontológico de la Dra. Andrea Martínez. Soy su asistente inteligente y atiendo consultas al instante las 24 hs.
+                </div>
+                <span class="wa-time">21:30</span>
+              </div>
+              <div class="wa-bubble bot">
+                <div class="wa-bubble-text">
+                  ¿En qué te puedo ayudar hoy? Podés elegir una opción rápida de abajo o escribir tu consulta con tus palabras:
+                </div>
+                <span class="wa-time">21:30</span>
+              </div>
+            </div>
+
+            <!-- Indicador "Escribiendo..." -->
+            <div class="wa-typing-indicator" id="demo-typing-indicator" style="display: none;">
+              <span>Dra. Martínez está escribiendo</span>
+              <div class="typing-dots">
+                <span></span><span></span><span></span>
+              </div>
+            </div>
+
+            <!-- Botones / Chips de preguntas frecuentes -->
+            <div class="wa-quick-chips" id="demo-quick-chips">
+              <button type="button" class="wa-chip" data-msg="¿Atienden con mi obra social o prepaga?">💳 ¿Atienden por mi obra social?</button>
+              <button type="button" class="wa-chip" data-msg="Quiero sacar un turno para limpieza dental">📅 Quiero sacar un turno</button>
+              <button type="button" class="wa-chip" data-msg="¿Dónde queda el consultorio y qué horarios tienen?">📍 Dirección y horarios</button>
+              <button type="button" class="wa-chip" data-msg="Tengo un dolor muy fuerte de muela, ¿tienen urgencias?">⚡ Tengo un dolor urgente</button>
+            </div>
+
+            <!-- Barra de entrada de mensajes -->
+            <form class="wa-input-bar" id="demo-chat-form" onsubmit="return false;">
+              <input 
+                type="text" 
+                id="demo-user-input" 
+                class="wa-input-field" 
+                placeholder="Escribí una consulta como paciente..." 
+                autocomplete="off"
+              >
+              <button type="submit" id="demo-send-btn" class="wa-send-btn" aria-label="Enviar mensaje">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                  <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                </svg>
+              </button>
+            </form>
           </div>
         </div>
 
-        <!-- Caja vacía para Demo visual / interactiva posterior -->
-        <div class="demo-placeholder-box">
-          <span class="demo-placeholder-badge">Espacio reservado para Demo interactiva</span>
-          <h4>Mirá cómo responde en segundos</h4>
-          <p>En este bloque se integrará la demostración interactiva o captura de pantalla del asistente conversando en tiempo real.</p>
-          
-          <!-- Mockup visual mínimo que simula la interacción -->
-          <div class="chat-preview-mockup" aria-hidden="true">
-            <div class="mock-bubble client">
-              Hola, ¿hasta qué hora tienen abierto hoy y cuánto sale el cambio de aceite?
-            </div>
-            <div class="mock-bubble bot">
-              ¡Hola! Hoy estamos hasta las 19:30 hs. El cambio con filtro te sale $X. ¿Querés que te reserve un turno para esta tarde?
-            </div>
-          </div>
+        <!-- 3) El después en una frase -->
+        <div class="state-card after" style="margin-top: 1.5rem; margin-bottom: 2rem;">
+          <h3><span>✨</span> El Después</h3>
+          <p>
+            <strong>Después:</strong> El paciente recibe una respuesta cálida en 3 segundos a cualquier hora de la noche, se saca todas las dudas y deja su turno coordinado; el consultorio no pierde pacientes y la secretaria encuentra la agenda organizada a la mañana siguiente sin contestar mensajes en su descanso.
+          </p>
+        </div>
+
+        <!-- Botón requerido al final de la demo -->
+        <div class="demo-cta-box">
+          <a href="#agendar" class="demo-action-button">
+            ¿Lo ves claro? Agendá 20 minutos y te armo la versión para tu negocio
+          </a>
         </div>
 
         <!-- Objeción que derriba -->
@@ -843,7 +1126,7 @@
           <div class="objection-text">
             <span class="objection-label">Duda frecuente</span>
             <strong>“Va a sonar como un contestador automático frío que me va a espantar a la clientela.”</strong>
-            <p>El asistente se entrena con tus propias palabras, modismos y tono de voz, brindando una atención cálida y personalizada como si fueras vos.</p>
+            <p>Como pudiste comprobar en la demo, el asistente responde con calidez, lenguaje natural y modismos locales, resolviendo dudas puntuales con la misma cordialidad que vos o tu secretaria.</p>
           </div>
         </div>
       </div>
@@ -855,10 +1138,10 @@
     <section id="como-trabajo">
       <div class="container">
         <span class="section-tag">Metodología</span>
-        <h2 class="section-title">Funcionando en tu negocio en 3 pasos y 7 a 10 días hábiles</h2>
+        <h2 class="section-title">Cómo trabajo: de la demo a tu negocio funcionando en 6 pasos</h2>
         
         <p class="secondary-text">
-          Sin frenar ni un solo día la actividad de tu negocio. De la configuración técnica me encargo yo al 100%.
+          Trabajás directamente conmigo, de persona a persona y sin sorpresas. Mi prioridad es que veas los resultados antes de tomar cualquier decisión de inversión.
         </p>
 
         <div class="steps-container">
@@ -866,8 +1149,8 @@
           <div class="step-item">
             <div class="step-number">1</div>
             <div class="step-content">
-              <h3>Charla inicial de 45 minutos</h3>
-              <p>Me contás cómo vendés, me pasás una lista simple con las preguntas que más te hacen tus clientes y el acceso a tu WhatsApp Business.</p>
+              <h3>Primero probás la demo</h3>
+              <p>Mirás cómo responde el asistente en un caso real (como la demo del consultorio que tenés acá arriba). Ves el tono cálido, la velocidad de respuesta y comprobás si esta solución encaja con lo que necesita tu día a día.</p>
             </div>
           </div>
 
@@ -875,8 +1158,8 @@
           <div class="step-item">
             <div class="step-number">2</div>
             <div class="step-content">
-              <h3>Pruebas y ajustes juntos</h3>
-              <p>Hacemos las pruebas juntos sobre tu misma línea para ajustar detalles y asegurarnos de que responda exactamente con el tono de tu negocio.</p>
+              <h3>Agendamos una reunión corta 1:1 (20 minutos)</h3>
+              <p>Elegís el día y la hora que te quede cómodo en mi calendario. Nos conectamos por videollamada para que me cuentes sobre tu negocio, qué consultas te desbordan y qué querés automatizar.</p>
             </div>
           </div>
 
@@ -884,8 +1167,35 @@
           <div class="step-item">
             <div class="step-number">3</div>
             <div class="step-content">
-              <h3>Listo y funcionando solo</h3>
-              <p>En 7 a 10 días hábiles queda operando las 24 horas. Vos solo te dedicás a atender a los clientes que ya están listos para comprar.</p>
+              <h3>Te muestro el asistente para tu rubro y recién ahí hablamos de inversión</h3>
+              <p>En esa misma videollamada te muestro una prueba pensada específicamente para tu negocio y evaluamos tu volumen real de mensajes. Recién cuando ves con tus propios ojos cómo respondería y comprobás que te sirve, te paso una propuesta justa y definitiva. Sin números al azar ni costos ocultos.</p>
+            </div>
+          </div>
+
+          <!-- Paso 4 -->
+          <div class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h3>Charla inicial de 45 minutos y armado</h3>
+              <p>Si la propuesta te cierra y decidís avanzar, tenemos una charla para entender a fondo cómo le hablás a tus clientes, me pasás tus dudas frecuentes y el acceso a tu WhatsApp Business. De toda la configuración técnica y la programación me encargo yo al 100%.</p>
+            </div>
+          </div>
+
+          <!-- Paso 5 -->
+          <div class="step-item">
+            <div class="step-number">5</div>
+            <div class="step-content">
+              <h3>Pruebas y ajustes juntos en tu misma línea</h3>
+              <p>Lo probamos juntos sobre tu mismo número para ajustar detalles finos, pulir respuestas y asegurarnos de que hable exactamente con tu estilo. Si el asistente no sabe algo, te lo deriva al instante sin inventar.</p>
+            </div>
+          </div>
+
+          <!-- Paso 6 -->
+          <div class="step-item">
+            <div class="step-number">6</div>
+            <div class="step-content">
+              <h3>Listo y funcionando solo en 7 a 10 días hábiles</h3>
+              <p>Te lo dejo operando las 24 horas sin haber frenado ni un solo día la actividad de tu negocio. Vos te olvidás de escribir 40 veces lo mismo y solo atendés a los clientes que ya están listos para comprar.</p>
             </div>
           </div>
         </div>
@@ -1081,14 +1391,159 @@
        JAVASCRIPT EMBEBIDO (Puro Vanilla JS, sin librerías)
        ================================================================= -->
   <script>
-    // Código Javascript embebido para interacciones de interfaz
+    // Código Javascript embebido para interacciones de la interfaz y la Demo de Consultorio
 
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. Manejo del botón CTA (Placeholder preparado para link posterior de Calendly/WhatsApp/Google Calendar)
+      // -------------------------------------------------------------
+      // 1. MANEJO DE LA DEMO INTERACTIVA (CONSULTORIO)
+      // -------------------------------------------------------------
+      const messagesContainer = document.getElementById('demo-messages-container');
+      const typingIndicator = document.getElementById('demo-typing-indicator');
+      const chatForm = document.getElementById('demo-chat-form');
+      const userInput = document.getElementById('demo-user-input');
+      const resetBtn = document.getElementById('demo-reset-btn');
+      const quickChips = document.querySelectorAll('.wa-chip');
+
+      // Función para obtener la hora actual formateada (HH:MM)
+      function getCurrentTime() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        return `${hours}:${minutes}`;
+      }
+
+      // Función para desplazar el chat hacia el final
+      function scrollChatToBottom() {
+        if (messagesContainer) {
+          messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+      }
+
+      // Función para agregar un mensaje a la pantalla
+      function appendMessage(text, sender = 'user') {
+        const bubble = document.createElement('div');
+        bubble.className = `wa-bubble ${sender}`;
+
+        const textDiv = document.createElement('div');
+        textDiv.className = 'wa-bubble-text';
+        textDiv.textContent = text;
+
+        const timeSpan = document.createElement('span');
+        timeSpan.className = 'wa-time';
+        timeSpan.textContent = getCurrentTime();
+
+        bubble.appendChild(textDiv);
+        bubble.appendChild(timeSpan);
+        messagesContainer.appendChild(bubble);
+
+        scrollChatToBottom();
+      }
+
+      // Lógica de respuesta inteligente simulada para el Consultorio
+      function getConsultorioResponse(message) {
+        const q = message.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+        // 1. Obras sociales / prepagas
+        if (q.includes("obra") || q.includes("prepaga") || q.includes("osde") || q.includes("swiss") || q.includes("galeno") || q.includes("medicus") || q.includes("pami") || q.includes("ioma") || q.includes("cobertura")) {
+          return "Trabajamos con OSDE, Swiss Medical, Galeno y Medicus con cobertura directa para consultas y tratamientos. Para otras obras sociales o particulares te emitimos la factura para reintegro en el acto. ¿Con cuál te atendés vos?";
+        }
+
+        // 2. Turnos / Citas / Horarios
+        if (q.includes("turno") || q.includes("agendar") || q.includes("cita") || q.includes("cuando") || q.includes("dia") || q.includes("hora")) {
+          return "¡Perfecto! Atendemos de lunes a viernes de 9:00 a 19:30 hs. Tenemos turnos disponibles para este jueves a las 11:30 hs o el viernes a las 16:00 hs. ¿Cuál de los dos te queda más cómodo para anotarte con la Dra. Martínez?";
+        }
+
+        // 3. Dolor / Urgencias
+        if (q.includes("dolor") || q.includes("urgencia") || q.includes("emergencia") || q.includes("muela") || q.includes("diente") || q.includes("hinchad") || q.includes("duele")) {
+          return "Si estás con dolor agudo o inflamación, te podemos guardar un sobreturno de urgencia para hoy mismo antes de las 18:00 hs. Por favor confirmanos tu nombre completo para avisarle a la Dra. Martínez en recepción. 🚨";
+        }
+
+        // 4. Ubicación / Dirección
+        if (q.includes("donde") || q.includes("direccion") || q.includes("ubicacion") || q.includes("queda") || q.includes("llegar") || q.includes("calle")) {
+          return "Estamos en Av. Santa Fe 2450, Piso 3, Consultorio B (Recoleta, a 2 cuadras de la estación Pueyrredón). Atendemos de lunes a viernes de 9:00 a 19:30 hs. ¿Querés coordinar una visita?";
+        }
+
+        // 5. Precios / Valores
+        if (q.includes("precio") || q.includes("costo") || q.includes("cuanto sale") || q.includes("valor") || q.includes("arancel") || q.includes("limpieza") || q.includes("blanqueamiento")) {
+          return "La consulta inicial de evaluación, diagnóstico y presupuesto no tiene costo adicional si contás con prepaga adherida. Para tratamientos particulares te entregamos el plan detallado en tu primera visita. ¿Querés que reservemos un turno de evaluación?";
+        }
+
+        // 6. Contacto humano / Secretaria
+        if (q.includes("secretaria") || q.includes("humano") || q.includes("persona") || q.includes("doctora") || q.includes("hablar con")) {
+          return "¡Por supuesto! Le dejo la consulta notificada a la secretaria del consultorio para que te escriba o te llame apenas se desocupe de recepción. 📲";
+        }
+
+        // Respuesta por defecto amable y orientada a consultorio
+        return "¡Hola! Con gusto te ayudo. Como asistente del consultorio puedo coordinar tu turno, informarte si trabajamos con tu obra social, darte indicaciones de cómo llegar o avisar por una urgencia. ¿En qué te puedo orientar?";
+      }
+
+      // Procesar el envío de mensaje del usuario
+      function handleSendMessage(text) {
+        if (!text || text.trim() === '') return;
+
+        const cleanText = text.trim();
+        appendMessage(cleanText, 'user');
+
+        if (userInput) userInput.value = '';
+
+        // Mostrar animación de 'escribiendo...'
+        if (typingIndicator) {
+          typingIndicator.style.display = 'flex';
+          scrollChatToBottom();
+        }
+
+        // Simular respuesta rápida natural (500 ms)
+        setTimeout(() => {
+          if (typingIndicator) typingIndicator.style.display = 'none';
+          const reply = getConsultorioResponse(cleanText);
+          appendMessage(reply, 'bot');
+        }, 550);
+      }
+
+      // Evento envío formulario
+      if (chatForm) {
+        chatForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          if (userInput) handleSendMessage(userInput.value);
+        });
+      }
+
+      // Evento chips de preguntas rápidas
+      quickChips.forEach((chip) => {
+        chip.addEventListener('click', () => {
+          const msg = chip.getAttribute('data-msg');
+          if (msg) handleSendMessage(msg);
+        });
+      });
+
+      // Evento botón reiniciar
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          if (messagesContainer) {
+            messagesContainer.innerHTML = `
+              <div class="wa-bubble bot">
+                <div class="wa-bubble-text">
+                  ¡Hola! 👋 Te comunicás con el Consultorio Odontológico de la Dra. Andrea Martínez. Soy su asistente inteligente y atiendo consultas al instante las 24 hs.
+                </div>
+                <span class="wa-time">21:30</span>
+              </div>
+              <div class="wa-bubble bot">
+                <div class="wa-bubble-text">
+                  ¿En qué te puedo ayudar hoy? Podés elegir una opción rápida de abajo o escribir tu consulta con tus palabras:
+                </div>
+                <span class="wa-time">21:30</span>
+              </div>
+            `;
+          }
+        });
+      }
+
+      // -------------------------------------------------------------
+      // 2. MANEJO DEL BOTÓN CTA PRINCIPAL
+      // -------------------------------------------------------------
       const ctaBtn = document.getElementById('btn-agendar');
       if (ctaBtn) {
         ctaBtn.addEventListener('click', (e) => {
-          // Si el href actual es un ancla interna '#agendar', mostramos un aviso explicativo y amigable
           if (ctaBtn.getAttribute('href') === '#agendar') {
             e.preventDefault();
             alert('¡Excelente! Este botón está listo. En el siguiente paso podés reemplazar el enlace con tu link de Calendly, WhatsApp o tu agenda online.');
@@ -1096,7 +1551,9 @@
         });
       }
 
-      // 2. Acordeón inteligente para FAQ: cierra otras respuestas si se abre una nueva (accesible y liviano)
+      // -------------------------------------------------------------
+      // 3. ACORDEÓN INTELIGENTE PARA PREGUNTAS FRECUENTES
+      // -------------------------------------------------------------
       const allFaqs = document.querySelectorAll('details.faq-item');
       allFaqs.forEach((faq) => {
         faq.addEventListener('toggle', () => {
