@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gabriela | Asistentes Inteligentes para WhatsApp</title>
+  <meta name="description" content="Instalo en tu negocio un asistente inteligente de WhatsApp que atiende consultas las 24 horas y te pasa solo a los clientes listos para comprar.">
+
+  <!-- =================================================================
+       ESTILOS CSS EMBEBIDOS (Puro CSS, sin frameworks ni librerías externas)
+       Diseño responsive, limpio, optimizado para móvil y escritorio.
+       ================================================================= -->
+  <style>
+    /* --- Variables de Color y Tipografía del Sistema --- */
+    :root {
+      --color-primary: #059669;        /* Verde esmeralda (inspirado en WhatsApp pero elegante) */
+      --color-primary-dark: #047857;   /* Verde oscuro para hover y contrastes */
+      --color-primary-light: #ecfdf5;  /* Fondo suave verde */
+      --color-text-main: #0f172a;      /* Texto principal de alto contraste (Slate 900) */
+      --color-text-muted: #475569;     /* Texto secundario (Slate 600) */
+      --color-bg-body: #f8fafc;        /* Fondo general suave (Slate 50) */
+      --color-bg-card: #ffffff;        /* Fondo de tarjetas y bloques */
+      --color-border: #e2e8f0;         /* Bordes sutiles (Slate 200) */
+      --color-danger-light: #fef2f2;   /* Fondo suave para objeciones / 'Para quién no' */
+      --color-danger-text: #991b1b;    /* Texto para 'Para quién no' */
+      --color-success-text: #166534;   /* Texto para 'Para quién sí' */
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.07);
+      --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --container-max-width: 860px;
+    }
+
+    /* --- Reseteo básico y Accesibilidad --- */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-family);
+      color: var(--color-text-main);
+      background-color: var(--color-bg-body);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding: 0;
+      margin: 0;
+    }
+
+    /* --- Contenedor Global --- */
+    .container {
+      width: 100%;
+      max-width: var(--container-max-width);
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    /* --- Encabezado / Barra Superior --- */
+    .site-header {
+      background-color: var(--color-bg-card);
+      border-bottom: 1px solid var(--color-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+      background-color: rgba(255, 255, 255, 0.95);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 0;
+    }
+
+    .brand-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--color-text-main);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .brand-badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      background-color: var(--color-primary-light);
+      color: var(--color-primary-dark);
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-full);
+      display: inline-block;
+    }
+
+    .header-status {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--color-primary);
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.2);
+    }
+
+    /* --- Secciones Generales --- */
+    section {
+      padding: 3.5rem 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-primary-dark);
+      background-color: var(--color-primary-light);
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-full);
+      margin-bottom: 0.85rem;
+    }
+
+    .section-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      line-height: 1.25;
+      color: var(--color-text-main);
+      margin-bottom: 1.2rem;
+    }
+
+    .lead-text {
+      font-size: 1.15rem;
+      color: var(--color-text-main);
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .secondary-text {
+      font-size: 1.05rem;
+      color: var(--color-text-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    /* --- Caja de Objeción Derribada --- */
+    .objection-card {
+      background-color: #fff;
+      border: 1px solid #fed7aa;
+      background: linear-gradient(to right, #fffaf5, #ffffff);
+      padding: 1.1rem 1.25rem;
+      border-radius: var(--radius-md);
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .objection-icon {
+      font-size: 1.25rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+
+    .objection-text {
+      font-size: 0.95rem;
+      color: #9a3412;
+      line-height: 1.5;
+    }
+
+    .objection-label {
+      font-weight: 700;
+      display: block;
+      margin-bottom: 0.2rem;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+    }
+
+    /* --- Sección 1: Hero / Presentación --- */
+    .hero-section {
+      padding: 4rem 0 3.5rem;
+      background: radial-gradient(circle at top left, #f0fdf4 0%, #f8fafc 60%);
+    }
+
+    .hero-title {
+      font-size: 2.35rem;
+      font-weight: 850;
+      line-height: 1.2;
+      color: var(--color-text-main);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    /* --- Sección 2: Para quién sí / Para quién no --- */
+    .target-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .target-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .target-card {
+      background: var(--color-bg-card);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .target-card.yes {
+      border-top: 4px solid var(--color-primary);
+    }
+
+    .target-card.no {
+      border-top: 4px solid #ef4444;
+    }
+
+    .target-card-header {
+      font-size: 1.15rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .target-card.yes .target-card-header {
+      color: var(--color-success-text);
+    }
+
+    .target-card.no .target-card-header {
+      color: var(--color-danger-text);
+    }
+
+    /* --- Sección 3: Demo (Antes y Después + Caja Vacía) --- */
+    .before-after-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-bottom: 1.75rem;
+    }
+
+    @media (min-width: 640px) {
+      .before-after-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .state-card {
+      padding: 1.35rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      background-color: var(--color-bg-card);
+    }
+
+    .state-card.before {
+      background-color: var(--color-danger-light);
+      border-color: #fecaca;
+    }
+
+    .state-card.after {
+      background-color: var(--color-primary-light);
+      border-color: #a7f3d0;
+    }
+
+    .state-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .state-card.before h3 {
+      color: var(--color-danger-text);
+    }
+
+    .state-card.after h3 {
+      color: var(--color-success-text);
+    }
+
+    /* Placeholder visual para la demo (Caja Vacía lista para incrustar después) */
+    .demo-placeholder-box {
+      border: 2px dashed #cbd5e1;
+      background-color: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      margin-top: 1.5rem;
+      position: relative;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .demo-placeholder-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--color-text-muted);
+      background-color: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-full);
+      margin-bottom: 1rem;
+    }
+
+    .demo-placeholder-box h4 {
+      font-size: 1.25rem;
+      color: var(--color-text-main);
+      margin-bottom: 0.5rem;
+    }
+
+    .demo-placeholder-box p {
+      font-size: 0.95rem;
+      color: var(--color-text-muted);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Simulación visual miniatura tipo chat dentro del placeholder */
+    .chat-preview-mockup {
+      max-width: 380px;
+      margin: 1.5rem auto 0;
+      background-color: #f0f2f5;
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      border: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      text-align: left;
+    }
+
+    .mock-bubble {
+      padding: 0.65rem 0.9rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      line-height: 1.4;
+      max-width: 82%;
+    }
+
+    .mock-bubble.client {
+      background-color: #ffffff;
+      align-self: flex-start;
+      border-bottom-left-radius: 3px;
+      color: #1e293b;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .mock-bubble.bot {
+      background-color: #d9fdd3;
+      align-self: flex-end;
+      border-bottom-right-radius: 3px;
+      color: #0f172a;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    /* --- Sección 4: Cómo trabajo (Pasos) --- */
+    .steps-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .step-item {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 1.35rem;
+      display: flex;
+      gap: 1.1rem;
+      align-items: flex-start;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .step-number {
+      background-color: var(--color-primary-light);
+      color: var(--color-primary-dark);
+      font-weight: 800;
+      font-size: 1.15rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-content h3 {
+      font-size: 1.15rem;
+      color: var(--color-text-main);
+      margin-bottom: 0.35rem;
+    }
+
+    .step-content p {
+      font-size: 1rem;
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    /* --- Sección 5: Presupuesto --- */
+    .pricing-philosophy-card {
+      background-color: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+      margin-top: 1rem;
+    }
+
+    .feature-points {
+      list-style: none;
+      margin: 1.25rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .feature-point {
+      display: flex;
+      gap: 0.65rem;
+      align-items: flex-start;
+      font-size: 1rem;
+      color: var(--color-text-main);
+    }
+
+    .feature-point-icon {
+      color: var(--color-primary);
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    /* --- Sección 6: Preguntas Frecuentes (FAQ / Objeciones) --- */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin-top: 1.5rem;
+    }
+
+    details.faq-item {
+      background-color: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    details.faq-item[open] {
+      border-color: #cbd5e1;
+      box-shadow: var(--shadow-sm);
+    }
+
+    summary.faq-question {
+      padding: 1.15rem 1.25rem;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--color-text-main);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+
+    summary.faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    summary.faq-question::after {
+      content: "+";
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--color-primary-dark);
+      transition: transform 0.2s ease;
+    }
+
+    details.faq-item[open] summary.faq-question::after {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      padding: 0 1.25rem 1.25rem;
+      color: var(--color-text-muted);
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    /* --- Sección 7: CTA Final (Agendar Reunión) --- */
+    .cta-section {
+      background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
+      color: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 3rem 1.75rem;
+      margin: 3rem auto;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .cta-section .section-title {
+      color: #ffffff;
+      font-size: 2.15rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta-section .lead-text {
+      color: #d1fae5;
+      max-width: 600px;
+      margin: 0 auto 1.25rem;
+    }
+
+    .cta-section .secondary-text {
+      color: #a7f3d0;
+      max-width: 620px;
+      margin: 0 auto 2rem;
+    }
+
+    /* Botón Principal de Acción (CTA) */
+    .cta-button {
+      display: inline-block;
+      background-color: #ffffff;
+      color: #065f46;
+      font-size: 1.15rem;
+      font-weight: 800;
+      text-decoration: none;
+      padding: 1.15rem 2.2rem;
+      border-radius: var(--radius-full);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+      cursor: pointer;
+      border: none;
+      -webkit-tap-highlight-color: transparent;
+      min-height: 52px;
+    }
+
+    .cta-button:hover, .cta-button:focus-visible {
+      transform: translateY(-2px);
+      background-color: #f0fdf4;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.2);
+      outline: none;
+    }
+
+    .cta-button:active {
+      transform: translateY(0);
+    }
+
+    .cta-objection-box {
+      background-color: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-md);
+      padding: 0.9rem 1.2rem;
+      max-width: 580px;
+      margin: 2rem auto 0;
+      font-size: 0.9rem;
+      color: #ecfdf5;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* --- Pie de Página --- */
+    .site-footer {
+      background-color: #ffffff;
+      border-top: 1px solid var(--color-border);
+      padding: 2.5rem 0;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    .footer-links {
+      margin-top: 0.75rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+    }
+
+    .footer-links a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+      color: var(--color-primary-dark);
+    }
+
+    /* --- Optimizaciones para Celular (Mobile-First) --- */
+    @media (max-width: 640px) {
+      .hero-title {
+        font-size: 1.85rem;
+      }
+      .section-title {
+        font-size: 1.55rem;
+      }
+      .cta-section {
+        padding: 2.25rem 1.25rem;
+      }
+      .cta-section .section-title {
+        font-size: 1.7rem;
+      }
+      .cta-button {
+        width: 100%;
+        padding: 1rem 1.25rem;
+        font-size: 1.05rem;
+      }
+      .step-item {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .header-status {
+        display: none; /* Simplifica la barra en pantallas muy estrechas */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =================================================================
+       BARRA SUPERIOR / ENCABEZADO
+       ================================================================= -->
+  <header class="site-header">
+    <div class="container header-content">
+      <a href="#inicio" class="brand-name">
+        <span>Gabriela</span>
+        <span class="brand-badge">Asistentes WhatsApp IA</span>
+      </a>
+      <div class="header-status">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>Atención automatizada 24/7</span>
+      </div>
+    </div>
+  </header>
+
+  <main id="inicio">
+
+    <!-- =================================================================
+         SECCIÓN 1: QUIÉN SOY Y QUÉ OFREZCO
+         ================================================================= -->
+    <section class="hero-section">
+      <div class="container">
+        <span class="section-tag">Presentación</span>
+        <h1 class="hero-title">Tu WhatsApp atendiendo las 24 horas sin que vivas pegado al teléfono.</h1>
+        
+        <p class="lead-text">
+          Soy Gabriela y le instalo a tu negocio un asistente inteligente que responde consultas al segundo y te pasa solo a los clientes listos para comprar.
+        </p>
+
+        <p class="secondary-text">
+          Dejás de perder ventas por tardar en contestar y recuperás tus noches y fines de semana libres.
+        </p>
+
+        <!-- Objeción que derriba -->
+        <div class="objection-card">
+          <span class="objection-icon" aria-hidden="true">💡</span>
+          <div class="objection-text">
+            <span class="objection-label">Duda frecuente</span>
+            <strong>“La inteligencia artificial es una moda para empresas de afuera que a mí no me sirve para nada.”</strong>
+            <p>Al contrario: está pensada exactamente para resolver la pérdida de ventas diaria y el agotamiento de responder siempre lo mismo en tu negocio de todos los días.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================
+         SECCIÓN 2: PARA QUIÉN SÍ / PARA QUIÉN NO
+         ================================================================= -->
+    <section id="para-quien">
+      <div class="container">
+        <span class="section-tag">Claridad total</span>
+        <h2 class="section-title">¿Esto sirve para tu negocio?</h2>
+        
+        <div class="target-grid">
+          <!-- Para quién SÍ -->
+          <article class="target-card yes">
+            <div class="target-card-header">
+              <span aria-hidden="true">✅</span>
+              <h3>Es para vos si...</h3>
+            </div>
+            <p>
+              Tenés un comercio, taller o consultorio donde te explota el WhatsApp con preguntas repetidas y sentís que el teléfono no te deja laburar.
+            </p>
+          </article>
+
+          <!-- Para quién NO -->
+          <article class="target-card no">
+            <div class="target-card-header">
+              <span aria-hidden="true">❌</span>
+              <h3>No es para vos si...</h3>
+            </div>
+            <p>
+              Casi no recibís consultas, buscás que una máquina cierre ventas complejas sin humanos o no podés dedicar 45 minutos a contarme cómo vendés.
+            </p>
+          </article>
+        </div>
+
+        <!-- Objeción que derriba -->
+        <div class="objection-card">
+          <span class="objection-icon" aria-hidden="true">🏪</span>
+          <div class="objection-text">
+            <span class="objection-label">Duda frecuente</span>
+            <strong>“Seguro esto es para empresas gigantes con miles de empleados, no para mi negocio de barrio.”</strong>
+            <p>Está diseñado puntualmente para comercios locales, profesionales independientes y talleres donde el dueño o pocos empleados atienden todo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================
+         SECCIÓN 3: DEMO (ANTES Y DESPUÉS)
+         ================================================================= -->
+    <section id="demo">
+      <div class="container">
+        <span class="section-tag">Demostración</span>
+        <h2 class="section-title">El antes y el después en tu día a día</h2>
+
+        <div class="before-after-grid">
+          <div class="state-card before">
+            <h3><span>⚠️</span> El Antes</h3>
+            <p>
+              Escribir 40 veces al día los mismos precios, perder clientes que se van a la competencia por no contestar rápido y sufrir con el teléfono en la cena familiar.
+            </p>
+          </div>
+
+          <div class="state-card after">
+            <h3><span>✨</span> El Después</h3>
+            <p>
+              Respuestas amables e instantáneas a cualquier hora, clientes filtrados y vos atendiendo únicamente cuando hay plata sobre la mesa.
+            </p>
+          </div>
+        </div>
+
+        <!-- Caja vacía para Demo visual / interactiva posterior -->
+        <div class="demo-placeholder-box">
+          <span class="demo-placeholder-badge">Espacio reservado para Demo interactiva</span>
+          <h4>Mirá cómo responde en segundos</h4>
+          <p>En este bloque se integrará la demostración interactiva o captura de pantalla del asistente conversando en tiempo real.</p>
+          
+          <!-- Mockup visual mínimo que simula la interacción -->
+          <div class="chat-preview-mockup" aria-hidden="true">
+            <div class="mock-bubble client">
+              Hola, ¿hasta qué hora tienen abierto hoy y cuánto sale el cambio de aceite?
+            </div>
+            <div class="mock-bubble bot">
+              ¡Hola! Hoy estamos hasta las 19:30 hs. El cambio con filtro te sale $X. ¿Querés que te reserve un turno para esta tarde?
+            </div>
+          </div>
+        </div>
+
+        <!-- Objeción que derriba -->
+        <div class="objection-card">
+          <span class="objection-icon" aria-hidden="true">💬</span>
+          <div class="objection-text">
+            <span class="objection-label">Duda frecuente</span>
+            <strong>“Va a sonar como un contestador automático frío que me va a espantar a la clientela.”</strong>
+            <p>El asistente se entrena con tus propias palabras, modismos y tono de voz, brindando una atención cálida y personalizada como si fueras vos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================
+         SECCIÓN 4: CÓMO TRABAJO, PASO A PASO
+         ================================================================= -->
+    <section id="como-trabajo">
+      <div class="container">
+        <span class="section-tag">Metodología</span>
+        <h2 class="section-title">Funcionando en tu negocio en 3 pasos y 7 días</h2>
+        
+        <p class="secondary-text">
+          Sin procesos engorrosos ni pérdidas de tiempo. Nos enfocamos en resolver tu atención rápido.
+        </p>
+
+        <div class="steps-container">
+          <!-- Paso 1 -->
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3>Charla inicial de 45 minutos</h3>
+              <p>Tenemos una charla para entender cómo hablás con tus clientes, me pasás tus dudas frecuentes y yo me encargo de todo el armado técnico.</p>
+            </div>
+          </div>
+
+          <!-- Paso 2 -->
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3>Prueba en tu mismo número</h3>
+              <p>Lo probamos juntos en tu mismo número para ajustar detalles, verificar las respuestas y asegurarnos de que hable tal como querés.</p>
+            </div>
+          </div>
+
+          <!-- Paso 3 -->
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3>Andando solo y sin complicaciones</h3>
+              <p>Te lo dejo funcionando de forma autónoma. No tenés que tocar nada raro ni instalar programas extraños en tu computadora.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Objeción que derriba -->
+        <div class="objection-card">
+          <span class="objection-icon" aria-hidden="true">⏱️</span>
+          <div class="objection-text">
+            <span class="objection-label">Duda frecuente</span>
+            <strong>“No tengo tiempo para ponerme a renegar con un sistema nuevo ni sé de tecnología.”</strong>
+            <p>Vos solo me dedicás 45 minutos para explicarme cómo vendés; del resto del armado y la configuración técnica me encargo yo al 100%.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================
+         SECCIÓN 5: CÓMO ARMO UN PRESUPUESTO
+         ================================================================= -->
+    <section id="presupuesto">
+      <div class="container">
+        <span class="section-tag">Transparencia</span>
+        <h2 class="section-title">Una propuesta clara y a tu medida (sin números al azar)</h2>
+
+        <div class="pricing-philosophy-card">
+          <p class="lead-text">
+            No paso números genéricos por chat porque cada negocio tiene su volumen de mensajes y su forma particular de atender.
+          </p>
+
+          <p class="secondary-text">
+            Primero nos juntamos 20 minutos, te muestro en vivo cómo respondería el asistente a tus propios clientes, y si te cierra, recién ahí te paso una propuesta justa y definitiva.
+          </p>
+
+          <ul class="feature-points">
+            <li class="feature-point">
+              <span class="feature-point-icon" aria-hidden="true">✓</span>
+              <span>Evaluamos tu cantidad real de mensajes semanales.</span>
+            </li>
+            <li class="feature-point">
+              <span class="feature-point-icon" aria-hidden="true">✓</span>
+              <span>Vemos qué consultas se pueden automatizar y cuáles preferís seguir respondiendo vos.</span>
+            </li>
+            <li class="feature-point">
+              <span class="feature-point-icon" aria-hidden="true">✓</span>
+              <span>Sin sorpresas ni cobros ocultos: propuesta fija antes de arrancar.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Objeción que derriba -->
+        <div class="objection-card">
+          <span class="objection-icon" aria-hidden="true">📋</span>
+          <div class="objection-text">
+            <span class="objection-label">Duda frecuente</span>
+            <strong>“Me van a encajar un paquete enlatado carísimo antes de saber si realmente me va a solucionar algo.”</strong>
+            <p>Primero ves el sistema respondiendo a las preguntas de tu rubro en tiempo real. Si no sentís que te resuelve el problema, no contratás nada.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================
+         SECCIÓN 6: PREGUNTAS FRECUENTES (CIERRA LAS 6 OBJECIONES)
+         ================================================================= -->
+    <section id="faq">
+      <div class="container">
+        <span class="section-tag">Preguntas Frecuentes</span>
+        <h2 class="section-title">Respuestas directas, sin vueltas</h2>
+        
+        <p class="lead-text">
+          Tu número no cambia, podés intervenir en cualquier charla cuando quieras y, si el asistente no sabe algo puntual, jamás inventa: te avisa al instante.
+        </p>
+
+        <p class="secondary-text">
+          No necesitás saber de computación para usarlo y cualquier cambio de precios u horarios me mandás un mensaje y te lo actualizo en el día.
+        </p>
+
+        <!-- Acordeón interactivo accesible con <details> nativo -->
+        <div class="faq-list">
+
+          <!-- FAQ 1: Sobre el control de la línea -->
+          <details class="faq-item">
+            <summary class="faq-question">¿Tengo riesgo de perder el control de mi línea o hacer un desastre técnico?</summary>
+            <div class="faq-answer">
+              Para nada. Tu número de WhatsApp sigue siendo tuyo y funciona exactamente igual en tu celular. Podés leer todas las conversaciones en tiempo real e intervenir en el momento en que vos quieras con solo escribir. Si el asistente no sabe algo puntual, jamás inventa: te lo deriva de inmediato.
+            </div>
+          </details>
+
+          <!-- FAQ 2: Negocios chicos vs empresas gigantes -->
+          <details class="faq-item">
+            <summary class="faq-question">¿Esto sirve para un negocio chico o de barrio, o es solo para multinacionales?</summary>
+            <div class="faq-answer">
+              Está hecho a medida de comercios de barrio, talleres, estudios y consultorios. Quienes más lo aprovechan son precisamente los negocios donde una o dos personas hacen todo y no dan abasto para contestar WhatsApp mientras trabajan.
+            </div>
+          </details>
+
+          <!-- FAQ 3: ¿Suena frío o robótico? -->
+          <details class="faq-item">
+            <summary class="faq-question">¿No va a sonar como un contestador automático que espante a mis clientes?</summary>
+            <div class="faq-answer">
+              No es un menú con botones rígidos de "marque 1 para precios". Es un modelo de lenguaje que comprende texto informal, audios y modismos habituales, redactando respuestas amables, educadas y con el tono exacto que vos usás en tu negocio.
+            </div>
+          </details>
+
+          <!-- FAQ 4: Tiempo y conocimientos técnicos -->
+          <details class="faq-item">
+            <summary class="faq-question">¿Cuánto tiempo me lleva a mí y qué pasa si no sé nada de tecnología?</summary>
+            <div class="faq-answer">
+              Solo dedicás 45 minutos en la videollamada inicial. Del diseño del flujo, configuración, pruebas y puesta en marcha me ocupo yo. Para usarlo en el día a día no tenés que aprender ningún programa nuevo; seguís usando tu WhatsApp de siempre.
+            </div>
+          </details>
+
+          <!-- FAQ 5: Precios y paquetes enlatados -->
+          <details class="faq-item">
+            <summary class="faq-question">¿Cómo sé si la inversión tiene sentido para mi caso antes de contratar?</summary>
+            <div class="faq-answer">
+              En la reunión de 20 minutos te muestro un prototipo funcionando en vivo con casos de tu negocio. Si no ves con tus propios ojos que te ahorra horas de trabajo y te salva ventas que hoy perdés, no avanzamos. Sin presiones.
+            </div>
+          </details>
+
+          <!-- FAQ 6: Actualización de precios y cambios futuros -->
+          <details class="faq-item">
+            <summary class="faq-question">¿Qué pasa cuando cambio mis precios, servicios u horarios?</summary>
+            <div class="faq-answer">
+              Me mandás un mensaje con la lista nueva o el horario actualizado y queda ajustado en el día. No tenés que preocuparte por tocar configuraciones técnicas complicadas.
+            </div>
+          </details>
+
+        </div>
+
+        <!-- Objeción que derriba -->
+        <div class="objection-card">
+          <span class="objection-icon" aria-hidden="true">🛡️</span>
+          <div class="objection-text">
+            <span class="objection-label">Duda frecuente</span>
+            <strong>“Tengo miedo de perder el control de mi línea de WhatsApp o hacer un desastre técnico.”</strong>
+            <p>Tenés control total: el teléfono sigue en tu mano, podés pausar el asistente cuando quieras y entrar a la conversación con un solo toque.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================
+         SECCIÓN 7: LLAMADO A LA ACCIÓN (CTA FINAL)
+         ================================================================= -->
+    <section id="agendar" class="container">
+      <div class="cta-section">
+        <span class="section-tag" style="background: rgba(255,255,255,0.2); color: #ffffff;">Siguiente paso</span>
+        <h2 class="section-title">Hablemos 20 minutos y miralo funcionando en vivo</h2>
+        
+        <p class="lead-text">
+          Elegí el día y la hora que te quede cómodo en el calendario para tener una videollamada corta.
+        </p>
+
+        <p class="secondary-text">
+          Te muestro una prueba armada para tu rubro, te sacás las dudas y decidís con tranquilidad si es lo que necesitás.
+        </p>
+
+        <!-- Botón solicitado -->
+        <div>
+          <a href="#agendar" class="cta-button" id="btn-agendar" role="button">
+            Agendá una reunión de 20 minutos
+          </a>
+        </div>
+
+        <!-- Objeción que derriba -->
+        <div class="cta-objection-box">
+          <strong>Objeción resuelta:</strong> “Me van a clavar una charla de venta pesadísima y voy a perder media mañana.”<br>
+          <em>Son solo 20 minutos puntuales, enfocados en tu rubro y sin ningún compromiso comercial.</em>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =================================================================
+       PIE DE PÁGINA
+       ================================================================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <p><strong>Gabriela</strong> — Asistentes Inteligentes para WhatsApp.</p>
+      <p style="margin-top: 0.35rem;">Automatización simple y cercana para negocios, talleres y consultorios.</p>
+      <div class="footer-links">
+        <a href="#inicio">Volver arriba</a>
+        <a href="#para-quien">Para quién es</a>
+        <a href="#demo">Demo</a>
+        <a href="#faq">Preguntas frecuentes</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =================================================================
+       JAVASCRIPT EMBEBIDO (Puro Vanilla JS, sin librerías)
+       ================================================================= -->
+  <script>
+    // Código Javascript embebido para interacciones de interfaz
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Manejo del botón CTA (Placeholder preparado para link posterior de Calendly/WhatsApp/Google Calendar)
+      const ctaBtn = document.getElementById('btn-agendar');
+      if (ctaBtn) {
+        ctaBtn.addEventListener('click', (e) => {
+          // Si el href actual es un ancla interna '#agendar', mostramos un aviso explicativo y amigable
+          if (ctaBtn.getAttribute('href') === '#agendar') {
+            e.preventDefault();
+            alert('¡Excelente! Este botón está listo. En el siguiente paso podés reemplazar el enlace con tu link de Calendly, WhatsApp o tu agenda online.');
+          }
+        });
+      }
+
+      // 2. Acordeón inteligente para FAQ: cierra otras respuestas si se abre una nueva (opcional y accesible)
+      const allFaqs = document.querySelectorAll('details.faq-item');
+      allFaqs.forEach((faq) => {
+        faq.addEventListener('toggle', () => {
+          if (faq.open) {
+            allFaqs.forEach((otherFaq) => {
+              if (otherFaq !== faq && otherFaq.open) {
+                otherFaq.removeAttribute('open');
+              }
+            });
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
